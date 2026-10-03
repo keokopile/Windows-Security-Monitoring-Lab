@@ -314,9 +314,5 @@ The laboratory demonstrates a complete basic SOC workflow from **event generatio
 
 ---
 
-# Disclaimer
 
-All security events in this project were intentionally generated on a personal Windows laboratory environment for educational and defensive security monitoring purposes.
-
-No unauthorized systems were targeted.
 
