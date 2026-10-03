@@ -230,6 +230,42 @@ Each investigation followed a structured workflow:
 | 4688 | Process creation | INC-003 |
 | 4720 | User account created | INC-004 |
 
+# MITRE ATT&CK Mapping
+
+The investigations were mapped to relevant MITRE ATT&CK techniques where the observed activity provided sufficient investigative context.
+
+| Investigation | Observed Activity | MITRE ATT&CK Technique | Technique ID |
+|---|---|---|---|
+| INC-001 | Failed authentication attempt | No direct technique assigned | N/A |
+| INC-002 | PowerShell execution | Command and Scripting Interpreter: PowerShell | T1059.001 |
+| INC-003 | PowerShell launching Notepad | Command and Scripting Interpreter: PowerShell | T1059.001 |
+| INC-004 | Local user account creation | Create Account: Local Account | T1136.001 |
+
+### Analyst Note
+
+MITRE ATT&CK mappings provide investigative context and should not be treated as proof of malicious activity.
+
+PowerShell is commonly used for legitimate Windows administration. The presence of PowerShell activity alone does not establish that an endpoint has been compromised.
+
+Analysts should correlate:
+
+- User
+- Host
+- Process
+- Command line
+- Timestamp
+- Authentication activity
+- Network activity
+- Related security events
+
+before determining whether observed activity is suspicious.
+
+The detailed mapping is documented in:
+
+`MITRE-ATT&CK-Mapping.md`
+
+---
+
 ---
 
 # SOC Investigation Skills Demonstrated
@@ -313,6 +349,4 @@ Each investigation produced:
 The laboratory demonstrates a complete basic SOC workflow from **event generation → detection → investigation → evidence preservation → reporting → closure**.
 
 ---
-
-
 
