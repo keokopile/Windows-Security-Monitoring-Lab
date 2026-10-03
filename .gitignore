@@ -1,0 +1,12 @@
+﻿# Raw endpoint evidence - keep local
+Evidence/
+
+# Windows/system artifacts
+*.evtx
+*.etl
+*.log
+
+# Local/private files
+*.csv
+*.xlsx
+*.zip

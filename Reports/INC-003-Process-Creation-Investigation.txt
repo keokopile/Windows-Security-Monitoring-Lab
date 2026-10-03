@@ -1,0 +1,173 @@
+﻿INCIDENT RESPONSE REPORT
+========================
+
+Incident ID: INC-003
+Incident Title: Process Creation Investigation
+Severity: Low
+Status: Closed
+Classification: Controlled Security Test
+Host: DESKTOP-U8DDIB2
+User Account: Keokopile
+
+1. INCIDENT SUMMARY
+-------------------
+A controlled process-creation security test was conducted on the Windows endpoint
+to validate Windows Security Event ID 4688 logging.
+
+Process Creation auditing was initially found to be disabled. The audit policy
+was subsequently enabled using:
+
+auditpol /set /subcategory:"Process Creation" /success:enable
+
+The configuration was verified successfully.
+
+A controlled Notepad process was then launched using PowerShell:
+
+Start-Process notepad.exe
+
+Windows generated Security Event ID 4688 confirming the creation of the
+Notepad process.
+
+2. DETECTION
+------------
+Detection Source:
+Windows Security Event Log
+
+Event ID:
+4688 - A new process has been created
+
+Detection Time:
+10/03/2026 20:49:42
+
+Account:
+Keokopile
+
+Host:
+DESKTOP-U8DDIB2
+
+3. PROCESS DETAILS
+------------------
+New Process:
+Notepad.exe
+
+New Process Path:
+C:\Program Files\WindowsApps\Microsoft.WindowsNotepad_11.2607.14.0_x64__8wekyb3d8bbwe\Notepad\Notepad.exe
+
+Creator Process:
+powershell.exe
+
+Creator Process Path:
+C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+
+Token Elevation Type:
+TokenElevationTypeFull (2)
+
+Mandatory Label:
+S-1-16-12288
+
+4. INVESTIGATION
+----------------
+Event ID 4688 was reviewed to determine whether the process creation represented
+potentially malicious activity.
+
+The process was launched intentionally as part of a controlled Windows security
+monitoring laboratory.
+
+The parent-child process relationship was:
+
+PowerShell
+    |
+    +-- Notepad.exe
+
+The initiating PowerShell session belonged to the local user account
+"Keokopile".
+
+No evidence from the investigated event indicated that Notepad was launched
+by an external attacker or an unauthorized remote source.
+
+5. EVIDENCE
+-----------
+Primary evidence file:
+
+C:\Users\Keokopile\Desktop\Windows-Security-Lab\Evidence\INC-003-Process-Creation.txt
+
+Evidence type:
+Windows Security Event ID 4688
+
+Evidence file size:
+9,398 bytes
+
+6. ANALYSIS
+-----------
+Event ID 4688 is useful for identifying process creation activity on Windows
+systems. The event provides information about the newly created process,
+the creating process, account context and elevation information.
+
+In this investigation, the event demonstrated that Windows can record process
+creation activity after the appropriate audit policy is enabled.
+
+The observed PowerShell -> Notepad process chain matched the controlled test
+that was intentionally executed during the investigation.
+
+7. RESPONSE
+-----------
+No containment or remediation action was required.
+
+The activity was classified as a controlled security test.
+
+The evidence was preserved for the laboratory investigation.
+
+8. CONCLUSION
+-------------
+INC-003 was successfully investigated.
+
+Windows Security Event ID 4688 successfully captured the controlled creation
+of Notepad.exe.
+
+The investigation confirmed that process creation auditing can provide useful
+endpoint telemetry for SOC investigations.
+
+The activity was determined to be benign and intentionally generated.
+
+9. SECURITY LESSON
+------------------
+Process creation monitoring is valuable during endpoint investigations because
+it allows analysts to establish process lineage.
+
+A SOC analyst should correlate:
+
+- User account
+- Process name
+- Process path
+- Parent process
+- Command line
+- Timestamp
+- Elevation information
+- Other surrounding security events
+
+A process such as PowerShell creating another process should not automatically
+be classified as malicious. Context and correlation are required before
+determining whether the activity is suspicious.
+
+10. MITRE ATT&CK RELEVANCE
+--------------------------
+Process creation telemetry can support investigation of several techniques
+in the MITRE ATT&CK framework, particularly activity involving PowerShell and
+execution.
+
+The event itself is telemetry rather than proof of malicious activity.
+
+11. FINAL DISPOSITION
+---------------------
+Incident ID: INC-003
+Disposition: Benign / Controlled Test
+Containment Required: No
+Remediation Required: No
+Evidence Preserved: Yes
+Investigation Status: Closed
+
+Generated for:
+Windows Security Monitoring Laboratory
+
+Generated on:
+10/03/2026

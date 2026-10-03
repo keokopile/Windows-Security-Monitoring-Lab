@@ -1,0 +1,141 @@
+﻿============================================================
+INC-002 - POWERSHELL ACTIVITY INVESTIGATION
+Windows Security Monitoring Laboratory
+============================================================
+
+1. INCIDENT SUMMARY
+-------------------
+Incident ID: INC-002
+Category: PowerShell Activity
+Severity: Low / Investigative
+Detection Source: Microsoft-Windows-PowerShell/Operational
+Primary Event ID: 4104
+Investigation Type: Controlled Security Test
+
+This investigation examined PowerShell activity recorded on the
+Windows endpoint. PowerShell Script Block Logging was enabled to
+capture script execution telemetry for defensive investigation.
+
+2. OBJECTIVE
+------------
+The objective was to determine whether PowerShell activity could
+be detected, collected, preserved and investigated using native
+Windows security telemetry.
+
+3. DETECTION
+------------
+PowerShell Script Block Logging generated Event ID 4104 records.
+
+The investigation identified script block activity including
+commands associated with:
+
+- PowerShell configuration
+- Script Block Logging configuration
+- Test commands
+- Get-Process activity
+- Controlled laboratory commands
+
+The telemetry was collected from:
+
+Microsoft-Windows-PowerShell/Operational
+
+4. EVIDENCE
+-----------
+Primary evidence:
+
+Evidence\INC-002-PowerShell-Activity.txt
+
+Additional test evidence:
+
+Evidence\INC-002-Test-Command.txt
+
+The primary evidence file contains the PowerShell Script Block
+Logging records collected during the investigation.
+
+5. INVESTIGATION FINDINGS
+-------------------------
+The collected telemetry demonstrates that PowerShell Script Block
+Logging can provide visibility into executed PowerShell content.
+
+Event ID 4104 records include:
+
+- Timestamp
+- Event ID
+- Script block content
+- Script Block ID
+- PowerShell activity
+
+The investigation also demonstrated that security-relevant
+PowerShell activity can be correlated with the commands executed
+during a controlled investigation.
+
+6. SECURITY ASSESSMENT
+----------------------
+PowerShell is a legitimate Windows administration tool but is
+frequently monitored by SOC teams because attackers may also use
+PowerShell for execution, discovery and other post-compromise
+activities.
+
+The presence of PowerShell activity alone does not establish
+malicious behaviour.
+
+Analysts should correlate:
+
+- User account
+- Host
+- Timestamp
+- Script contents
+- Parent process
+- Command line
+- Related security events
+- Network activity
+- Authentication activity
+
+before determining whether the activity is suspicious.
+
+7. MITRE ATT&CK RELEVANCE
+-------------------------
+PowerShell telemetry can support investigation of techniques
+associated with command and scripting interpreter activity.
+
+The telemetry is useful for detecting and investigating potential
+PowerShell-based execution.
+
+The event itself is evidence of execution telemetry and is not,
+by itself, proof of malicious activity.
+
+8. RESPONSE
+-----------
+Containment Required: No
+Remediation Required: No
+
+The activity was intentionally generated as part of a controlled
+Windows security laboratory.
+
+No unauthorized systems were targeted.
+
+9. SECURITY LESSON
+------------------
+PowerShell logging provides valuable endpoint visibility.
+
+A SOC analyst should not rely on the existence of PowerShell alone
+to classify an event as malicious. The analyst should examine the
+script content and correlate it with the user, host, process,
+timestamp and surrounding security events.
+
+10. FINAL DISPOSITION
+---------------------
+Incident ID: INC-002
+Disposition: Benign / Controlled Test
+Containment Required: No
+Remediation Required: No
+Evidence Preserved: Yes
+Investigation Status: Closed
+
+Generated for:
+Windows Security Monitoring Laboratory
+
+Generated on:
+10/03/2026
+
+============================================================
